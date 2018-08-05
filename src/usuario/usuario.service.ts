@@ -17,24 +17,26 @@ export class UsuarioService {
     }
 
     async findOneById(@Param('id') id): Promise<Usuario> {
-        return await this.usuarioRepository.findOne(id);
+        return await this.usuarioRepository.findOneOrFail(id);
     }
 
-    async create(usuario: Usuario): Promise<InsertResult> {
-        return await this.usuarioRepository.insert(usuario);
+    async create(usuario: Usuario): Promise<Usuario> {
+
+        const result = await this.usuarioRepository.insert(usuario);
+        this.findOneById(result.identifiers[0].id)
+            .then( async e => e);
+
+        return await null;
     }
 
-    async delete(@Param('id') id): Promise<Usuario[]> {
+    async delete(id: number): Promise<Usuario> {
+        try {
+            const toDelete = this.findOneById(id);
+            await this.usuarioRepository.remove(id);
 
-        this.findOneById(id)
-        .then(async usuario => {
-            return await this.usuarioRepository.remove(usuario);
-        })
-        .catch( async err => {
-            return new HttpException('Not Found', HttpStatus.NOT_FOUND);
-        })
-        ;
-
-        return await  null;
+            return await toDelete;
+        } catch (e) {
+            throw Error(e);
+        }
     }
 }
