@@ -40,8 +40,8 @@ export class UsuarioResolver {
 
 // ------------------------------------------
 
-    @Query('prueba')
-    async prueba(obj, args, context, info) {
+    @Query('search')
+    async search(obj, args, context, info) {
         return await this.usuarioService.search({usuario : args.usuario});
     }
 

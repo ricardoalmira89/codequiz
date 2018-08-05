@@ -2,7 +2,7 @@
 type Query {
     usuarios: [Usuario]
     usuario(id: ID!): Usuario
-    prueba(usuario: UsuarioType) : [Usuario]
+    search(usuario: UsuarioType) : [Usuario]
 }
 
 type Mutation {
