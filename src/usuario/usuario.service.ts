@@ -4,6 +4,7 @@ import { Repository} from 'typeorm';
 
 import { Usuario } from './usuario.entity';
 import { Param } from '@nestjs/common/utils/decorators/route-params.decorator';
+import {Like} from 'typeorm';
 
 @Injectable()
 export class UsuarioService {
@@ -20,14 +21,12 @@ export class UsuarioService {
     }
 
     async search(query: any): Promise<Usuario[]>{
-        return await this.usuarioRepository.find({
-            where: { email: query.usuario.email},
-            // where: {
-            //     OR: [
-            //         { email: query.usuario.email},
-            //     ],
-            // },
-        });
+
+        return await this.usuarioRepository
+           .createQueryBuilder('e')
+           .where('e.email = :email', {email: query.usuario.email})
+           .orWhere('e.nombre LIKE :nombre', {nombre: '%'+ query.usuario.nombre + '%'})
+           .getMany();
     }
 
     async create(entity: Usuario): Promise<Usuario> {
