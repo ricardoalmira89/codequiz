@@ -2,12 +2,12 @@
 type Query {
     usuarios: [Usuario]
     usuario(id: ID!): Usuario
-    search(usuario: UsuarioType) : [Usuario]
+    search(usuario: UsuarioInput) : [Usuario]
 }
 
 type Mutation {
     createUsuario(nombre: String, email: String, password: String, edad: Int): Usuario,
-    updateUsuario(id: Int, nombre: String, email: String, password: String, edad: Int): Usuario,
+    updateUsuario(id: Int!, usuario: UsuarioInput!): Usuario,
     deleteUsuario(id: Int) : Usuario,
 }
 
@@ -23,7 +23,7 @@ type Usuario {
     edad: Int
 }
 
-input UsuarioType {
+input UsuarioInput {
     email: String,
     nombre: String,
     edad: Int,

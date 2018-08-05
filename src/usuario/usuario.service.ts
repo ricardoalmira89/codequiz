@@ -49,4 +49,28 @@ export class UsuarioService {
             throw Error(e);
         }
     }
+
+    async update(id: any, usuario: Usuario): Promise<Usuario>{
+        try {
+
+            this.findOneById(id).then( async entity => {
+
+                entity.nombre = usuario.nombre;
+                entity.email = usuario.email;
+                entity.edad = usuario.edad;
+                entity.email = usuario.email;
+
+                this.usuarioRepository.save(entity).then( async u => {
+                    return await u;
+                });
+
+            });
+
+
+            return await usuario;
+
+        } catch (e) {
+            throw Error(e);
+        }
+    }
 }

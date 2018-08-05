@@ -35,7 +35,7 @@ export class UsuarioResolver {
 
     @Mutation('updateUsuario')
     async update(obj, args, context, info) {
-        // return await this.usuarioService.
+        return await this.usuarioService.update(args.id, args.usuario);
     }
 
 // ------------------------------------------
