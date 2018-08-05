@@ -15,9 +15,10 @@ import { GraphQLModule, GraphQLFactory } from '@nestjs/graphql';
 
 import {QuizModule} from './quiz/quiz.module';
 import {UsuarioModule} from './usuario/usuario.module';
+import {PreguntaModule} from './pregunta/pregunta.module';
 
 @Module({
-  imports: [ TypeOrmModule.forRoot() , GraphQLModule, UsuarioModule, QuizModule],
+  imports: [ TypeOrmModule.forRoot() , GraphQLModule, UsuarioModule, QuizModule, PreguntaModule],
   controllers: [AppController],
   providers: [AppService],
 })

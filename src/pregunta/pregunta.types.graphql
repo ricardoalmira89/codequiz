@@ -1,0 +1,27 @@
+
+type Query {
+    preguntas: [Pregunta]
+    pregunta(id: ID!): Pregunta
+    searchPregunta(query: PreguntaInput) : [Pregunta]
+}
+
+type Mutation {
+    createPregunta(texto: String, respuesta_texto: String): Pregunta,
+    updatePregunta(id: Int!, entity: PreguntaInput!): Pregunta,
+    deletePregunta(id: Int) : Pregunta,
+}
+
+type Subscription {
+    preguntaCreated: Pregunta
+}
+
+type Pregunta {
+    id: Int
+    texto: String
+    respuesta_texto: String
+}
+
+input PreguntaInput {
+    texto: String,
+    respuesta_texto: String,
+}
