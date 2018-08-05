@@ -21,12 +21,10 @@ export class QuizService {
 
     async search(query: any): Promise<Quiz[]>{
 
-        console.log(query);
-
         return await this.repository
            .createQueryBuilder('e')
            // .where('e.email = :email', {email: query.usuario.email})
-           .orWhere('e.titulo LIKE :titulo', {titulo: '%' + query.quiz.titulo + '%'})
+           .orWhere('e.titulo LIKE :titulo', {titulo: '%' + query.titulo + '%'})
            // .orWhere('e.edad > :edad_gt', {edad_gt: query.usuario.edad_gt })
            // .andWhere('e.edad < :edad_lt', {edad_lt: query.usuario.edad_lt })
            .getMany();

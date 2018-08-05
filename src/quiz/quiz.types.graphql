@@ -2,12 +2,12 @@
 type Query {
     quizzes: [Quiz]
     quiz(id: ID!): Quiz
-    searchQuiz(quiz: QuizInput) : [Quiz]
+    searchQuiz(query: QuizInput) : [Quiz]
 }
 
 type Mutation {
     createQuiz(titulo: String, descripcion: String): Quiz,
-    updateQuiz(id: Int!, quiz: QuizInput!): Quiz,
+    updateQuiz(id: Int!, entity: QuizInput!): Quiz,
     deleteQuiz(id: Int) : Quiz,
 }
 

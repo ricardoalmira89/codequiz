@@ -35,14 +35,14 @@ export class QuizResolver {
 
     @Mutation('updateQuiz')
     async update(obj, args, context, info) {
-        return await this.service.update(args.id, args.quiz);
+        return await this.service.update(args.id, args.entity);
     }
 
 // ------------------------------------------
 
     @Query('searchQuiz')
     async search(obj, args, context, info) {
-        return await this.service.search({quiz : args.quiz});
+        return await this.service.search(args.query);
     }
 
 }
