@@ -1,0 +1,27 @@
+
+type Query {
+    quizzes: [Quiz]
+    quiz(id: ID!): Quiz
+    searchQuiz(quiz: QuizInput) : [Quiz]
+}
+
+type Mutation {
+    createQuiz(titulo: String, descripcion: String): Quiz,
+    updateQuiz(id: Int!, quiz: QuizInput!): Quiz,
+    deleteQuiz(id: Int) : Quiz,
+}
+
+type Subscription {
+    quizCreated: Quiz
+}
+
+type Quiz {
+    id: Int
+    titulo: String
+    descripcion: String
+}
+
+input QuizInput {
+    titulo: String,
+    descripcion: String,
+}

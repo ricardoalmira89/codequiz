@@ -9,15 +9,15 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule} from '@nestjs/typeorm';
-import {UsuarioModule} from './usuario/usuario.module';
 import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
+import { graphqlExpress } from 'apollo-server-express/dist/expressApollo';
 import { GraphQLModule, GraphQLFactory } from '@nestjs/graphql';
 
-import { graphqlExpress } from 'apollo-server-express/dist/expressApollo';
-
+import {QuizModule} from './quiz/quiz.module';
+import {UsuarioModule} from './usuario/usuario.module';
 
 @Module({
-  imports: [ TypeOrmModule.forRoot() , GraphQLModule, UsuarioModule],
+  imports: [ TypeOrmModule.forRoot() , GraphQLModule, UsuarioModule, QuizModule],
   controllers: [AppController],
   providers: [AppService],
 })
