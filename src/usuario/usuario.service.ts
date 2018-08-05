@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {InsertResult, Repository} from 'typeorm';
 
 import { Usuario } from './usuario.entity';
 import { Param } from '@nestjs/common/utils/decorators/route-params.decorator';
+import {error} from 'util';
 
 @Injectable()
 export class UsuarioService {
@@ -30,8 +31,7 @@ export class UsuarioService {
             return await this.usuarioRepository.remove(usuario);
         })
         .catch( async err => {
-            console.log('El usuario no existe');
-            return await null;
+            return new HttpException('Not Found', HttpStatus.NOT_FOUND);
         })
         ;
 

@@ -32,4 +32,9 @@ export class UsuarioResolver {
     async delete(obj, args, context, info) {
         return await this.usuarioService.delete({ id: args.id });
     }
+
+    @Mutation('updateUsuario')
+    async update(obj, args, context, info) {
+        // return await this.usuarioService.
+    }
 }
