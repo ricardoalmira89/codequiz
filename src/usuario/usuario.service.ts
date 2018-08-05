@@ -22,19 +22,18 @@ export class UsuarioService {
 
     async create(usuario: Usuario): Promise<Usuario> {
 
-        const result = await this.usuarioRepository.insert(usuario);
-        this.findOneById(result.identifiers[0].id)
-            .then( async e => e);
+        const insertResult = await this.usuarioRepository.insert(usuario);
+        const created = this.findOneById(insertResult.identifiers[0].id);
 
-        return await null;
+        return await created;
     }
 
     async delete(id: number): Promise<Usuario> {
         try {
-            const toDelete = this.findOneById(id);
+            const usuario = this.findOneById(id);
             await this.usuarioRepository.remove(id);
 
-            return await toDelete;
+            return await usuario;
         } catch (e) {
             throw Error(e);
         }
