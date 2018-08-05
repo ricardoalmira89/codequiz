@@ -7,7 +7,7 @@ import { Dependencies} from '@nestjs/common/utils/decorators/dependencies.decora
 @Dependencies(UsuarioService)
 export class UsuarioResolver {
 
-    private usuarioService : UsuarioService;
+    private usuarioService: UsuarioService;
 
     constructor(usuarioService) {
         this.usuarioService = usuarioService;
@@ -37,4 +37,12 @@ export class UsuarioResolver {
     async update(obj, args, context, info) {
         // return await this.usuarioService.
     }
+
+// ------------------------------------------
+
+    @Query('prueba')
+    async prueba(obj, args, context, info) {
+        return await this.usuarioService.search({usuario : args.usuario});
+    }
+
 }

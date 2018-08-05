@@ -1,10 +1,9 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import {InsertResult, Repository} from 'typeorm';
+import { Injectable} from '@nestjs/common';
+import { InjectRepository} from '@nestjs/typeorm';
+import { Repository} from 'typeorm';
 
 import { Usuario } from './usuario.entity';
 import { Param } from '@nestjs/common/utils/decorators/route-params.decorator';
-import {error} from 'util';
 
 @Injectable()
 export class UsuarioService {
@@ -20,20 +19,31 @@ export class UsuarioService {
         return await this.usuarioRepository.findOneOrFail(id);
     }
 
-    async create(usuario: Usuario): Promise<Usuario> {
+    async search(query: any): Promise<Usuario[]>{
+        return await this.usuarioRepository.find({
+            where: { email: query.usuario.email},
+            // where: {
+            //     OR: [
+            //         { email: query.usuario.email},
+            //     ],
+            // },
+        });
+    }
 
-        const insertResult = await this.usuarioRepository.insert(usuario);
+    async create(entity: Usuario): Promise<Usuario> {
+
+        const insertResult = await this.usuarioRepository.insert(entity);
         const created = this.findOneById(insertResult.identifiers[0].id);
 
         return await created;
     }
 
-    async delete(id: number): Promise<Usuario> {
+    async delete(id: any): Promise<Usuario> {
         try {
-            const usuario = this.findOneById(id);
+            const entity = this.findOneById(id);
             await this.usuarioRepository.remove(id);
 
-            return await usuario;
+            return await entity;
         } catch (e) {
             throw Error(e);
         }

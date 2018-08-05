@@ -2,6 +2,7 @@
 type Query {
     usuarios: [Usuario]
     usuario(id: ID!): Usuario
+    prueba(usuario: UsuarioType) : [Usuario]
 }
 
 type Mutation {
@@ -22,3 +23,7 @@ type Usuario {
     edad: Int
 }
 
+input UsuarioType {
+    email: String,
+    nombre: String
+}
