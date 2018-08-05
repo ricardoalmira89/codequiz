@@ -25,7 +25,9 @@ export class UsuarioService {
         return await this.usuarioRepository
            .createQueryBuilder('e')
            .where('e.email = :email', {email: query.usuario.email})
-           .orWhere('e.nombre LIKE :nombre', {nombre: '%'+ query.usuario.nombre + '%'})
+           .orWhere('e.nombre LIKE :nombre', {nombre: '%' + query.usuario.nombre + '%'})
+           .orWhere('e.edad > :edad_gt', {edad_gt: query.usuario.edad_gt })
+           .andWhere('e.edad < :edad_lt', {edad_lt: query.usuario.edad_lt })
            .getMany();
     }
 

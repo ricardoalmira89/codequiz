@@ -25,5 +25,8 @@ type Usuario {
 
 input UsuarioType {
     email: String,
-    nombre: String
+    nombre: String,
+    edad: Int,
+    edad_gt: Int,
+    edad_lt: Int
 }
